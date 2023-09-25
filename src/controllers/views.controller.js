@@ -343,8 +343,11 @@ export class ViewsController{
                 logger.http("FuncDelete", productDB);
 
             };
+
+
+
                 //Render
-               return res.json(clientPageInfo);
+               return res.render("purchaseConfirmation",clientPageInfo)
             };
             
             
