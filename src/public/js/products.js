@@ -9,7 +9,7 @@ console.log("js products");
         console.log(userLog.innerText);
         console.log("productId",idProduct);
         resp =await fetch(`http://localhost:8080/api/carts/${cartId}/product/${idProduct}`,{
-            method:'POST'
+            method:'POST',mode:"cors"
         });
         result = await resp.json();
         console.log("products js result",result)
