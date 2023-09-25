@@ -4,8 +4,7 @@ import { PaymentService } from "../services/payment.service.js";
 import { logger } from "../utils/logger.js";
 import { options } from "../config/config.js";
 import Stripe from "stripe";
-
-
+import { ticketsService } from "../services/tickets.service.js";
 import {v4 as uuidv4} from 'uuid';
 
 export class paymentController{
@@ -102,5 +101,91 @@ export class paymentController{
             } catch (error) {
                 return res.json ({error:"Error al comprar stripe", message:error.message})
             }
+            };
+            static async purchaseConfirmationView(req,res){
+                try {
+                    let myuuid = uuidv4();
+                    const cartId = await req.user.cart;
+                    console.log("purchaseConfirmationViewCart", cartId)
+                    const data = await cartsService.getCartById(cartId);
+                    if (data){
+                        logger.debug("Carrito existe puede comprar");
+                       const productsAproved =[];
+                       const productsRejected =[];
+        
+                       for(let i=0;i<data.products.length;i++){
+                           const productIdCart = data.products[i];
+                           const productDB = await ProductsService.getProductById(data.products[i].product._id);
+        
+                            if(productDB.stock>= productIdCart.quantity){
+                                productsAproved.push({
+                                    productId:productIdCart.product._id,
+                                    product:productIdCart.product.title,
+                                    quantity:productIdCart.quantity,
+                                    price:productDB.price,
+                                    pricexquantity:productDB.price*productIdCart.quantity
+                                });
+                                const newStock = parseInt(productDB.stock) - productIdCart.quantity;
+                                console.log(newStock);
+                            }
+                            if(productDB.stock< productIdCart.quantity){
+                                productsRejected.push({
+                                    productId:productIdCart.product._id,
+                                    product:productIdCart.product.title,
+                                    stock:productDB.stock
+                                })};
+                       };
+                       var today = new Date();
+                        var dd = String(today.getDate()).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                        var yyyy = today.getFullYear();
+        
+                        today = dd + '/' + mm + '/' + yyyy;
+        
+                        let totalAmount = productsAproved.reduce((acum,act) => acum + act.pricexquantity,0);
+        
+                        logger.debug("Total amount: ",totalAmount)
+        
+                       const ticketInfo = {
+                        code:myuuid,
+                        purchaseDatetime:today,
+                        products:{
+                            productsAproved
+                        },
+                        amount:totalAmount,
+                        purchaser:await req.user.email
+                       };
+                       const clientPageInfo ={
+                        myCart:cartId,
+                        ...ticketInfo,
+                        productsRejected:{
+                            productsRejected
+                        }
+                       };
+                       logger.http("data client info",clientPageInfo);
+                       logger.http("requser",req.user);
+                       logger.http("prodAp",productsAproved);
+        
+                       //Crear ticket y eliminar productos
+        
+        
+                       const orderConfirmed = await ticketsService.createTicket(ticketInfo);
+                       logger.info("OrderConfirmed ",orderConfirmed);
+        
+                       //Borrar productos aprobados del carrito
+                       for(let i=0;i<productsAproved.length;i++){
+                        const productIdCart = productsAproved[i];
+                       // console.log("borrando productos", await ProductsService.getProductById(productIdCart.productId));
+        
+                        const productDB = await cartsService.deleteProductFromCart(cartId,productIdCart.productId);
+                        logger.http("FuncDelete", productDB);
+                    };
+                        //Render
+                       return res.render("purchaseConfirmation",clientPageInfo)
+                    };
+                } catch (error) {
+                    console.log("Error en viewsController")
+                    return res.json("No se pudo completar la solicitud de compra")
+                }
             };
         }

@@ -12,12 +12,9 @@ import {v4 as uuidv4} from 'uuid';
 const router = Router();
 
 router.post("/create-checkout-session", paymentController.paymentIntentProductsCart);
+//TicketPurchase
+router.get('/order/success', paymentController.purchaseConfirmationView);
 
-router.get('/order/success', async (req, res) => {
-  
-
-    res.render("successPurchase");
-  });
   router.get('/order/error', async (req, res) => {
   
     res.render("errorPurchase");
