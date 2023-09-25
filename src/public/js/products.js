@@ -12,7 +12,8 @@ console.log("js products");
             method:'POST'
         });
         result = await resp.json();
-        console.log("Status: ",result.status,"Message: ",result.message);
+        console.log("products js result",result)
+        /* console.log("Status: ",result.status,"Message: ",result.message); */
     } catch (error) {
         console.log("No hay sesión iniciada", error.message)
     }
