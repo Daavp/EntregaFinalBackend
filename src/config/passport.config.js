@@ -33,7 +33,7 @@ export const initializePassport = ()=>{ //Aqui van las estrategias
                             password:createHash(password),
                             role:"admin",
                             cart:coderCart,
-                            avatar:req.file.filename
+/*                             avatar:req.file.filename */
                         };
                        const userCoderCreated = await UsersService.saveUser(newUserCoder);
                         return done(null,userCoderCreated)};
@@ -46,7 +46,7 @@ export const initializePassport = ()=>{ //Aqui van las estrategias
                     age:userSignupForm.age,
                     password:createHash(password),
                     cart:userCart,
-                    avatar:req.file.filename
+/*                     avatar:req.file.filename */
                 };
                 const userCreated = await UsersService.saveUser(newUserCreated);
                 return done(null,userCreated)
