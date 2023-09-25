@@ -86,12 +86,12 @@ export class paymentController{
         
                //generar informacion de la compra
                console.log("Line items ",line_items);
-
+               
             const stripe = new Stripe(options.stripe.secretStripeBack);
                const session = await stripe.checkout.sessions.create({
                 line_items:line_items,
                 mode:'payment',
-                success_url:`${options.stripe.siteDomain}/carts/purchaseConfirmation`,
+                success_url:`/carts/purchaseConfirmation`, //${options.stripe.siteDomain}
                 cancel_url:`${options.stripe.siteDomain}/api/payments/order/error`
                });
             return res.json(session)
