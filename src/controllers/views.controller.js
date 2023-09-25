@@ -268,6 +268,7 @@ export class ViewsController{
 
             let myuuid = uuidv4();
             const cartId = req.user.cart;
+            console.log("purchaseConfirmationViewCart", cartId)
             const data = await cartsService.getCartById(cartId);
             if (data){
                 logger.debug("Carrito existe puede comprar");
