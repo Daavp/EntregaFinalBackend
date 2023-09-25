@@ -91,7 +91,7 @@ export class paymentController{
                const session = await stripe.checkout.sessions.create({
                 line_items:line_items,
                 mode:'payment',
-                success_url:`${options.stripe.siteDomain}/carts/${cartId}/purchaseConfirmation`,
+                success_url:`${options.stripe.siteDomain}/carts/purchaseConfirmation`,
                 cancel_url:`${options.stripe.siteDomain}/api/payments/order/error`
                });
             return res.json(session)

@@ -26,7 +26,7 @@ router.get("/profile",  ViewsController.viewsProfile);
 //TicketPurchase
 router.get("/carts/:cid/purchase",  ViewsController.purchaseView);
 //TicketPurchase
-router.get("/carts/:cid/purchaseConfirmation",  ViewsController.purchaseConfirmationView);
+router.get("/carts/purchaseConfirmation",  ViewsController.purchaseConfirmationView);
 //userTickets
 router.get("/userTickets",  ViewsController.getUserTickets);
 //LoggerTest
