@@ -12,7 +12,7 @@ console.log("Admin view");
         console.log("Status: ",result.status,"Message: Cambio realizado");
         cuadroCambio.innerHTML ="";
             const newRoleChange = document.createElement("p");
-            newRoleChange.innerHTML = `Cambio realizado, actualiza la pagina`;
+            newRoleChange.innerHTML = `Soliciud enviada, actualiza la pagina para revisar si fue efectivo (Recuerda que debe tener los datos completos)`;
             cuadroCambio.appendChild(newRoleChange);
     } catch (error) {
         console.log("No puedes hacer el cambio")

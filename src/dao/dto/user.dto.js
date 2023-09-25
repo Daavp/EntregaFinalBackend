@@ -5,7 +5,8 @@ export class userDto{
         this.email = userDB.email,
         this.role = userDB.role,
         this.cart = userDB.cart,
-        this.last_connection = userDB.last_connection
+        this.last_connection = userDB.last_connection,
+        this.status = userDB.status
     }
 }
 

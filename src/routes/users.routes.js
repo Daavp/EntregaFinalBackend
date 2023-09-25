@@ -11,5 +11,6 @@ userController.modifyRole);
 router.post("/:uid/documents",UserAuthviews, uploaderUserDoc.fields([{name:"identificacion",maxCount:1},{name:"domicilio",maxCount:1},{name:"estadoDeCuenta",maxCount:1}]), userController.uploadDocuments)
 router.get("/", UserAuthviews, userController.getUsers);
 router.get("/getUsersToDelete", UserAuthviews, userController.getUsersToDelete);
+router.get("/getUserById/:cid", UserAuthviews, userController.getUserById);
 router.delete("/deleteUser/:userid", UserAuthviews, checkRoles(["admin"]),  userController.deleteUser);
 export {router as userRouter}; 
