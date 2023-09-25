@@ -11,8 +11,8 @@ console.log("js products");
         resp =await fetch(`http://localhost:8080/api/carts/${cartId}/product/${idProduct}`,{
             method:'POST'
         });
-        result = await resp.json();
-        console.log("Status: ",result.status,"Message: ",result.message);
+/*         result = await resp.json();
+        console.log("Status: ",result.status,"Message: ",result.message); */
     } catch (error) {
         console.log("No hay sesión iniciada", error.message)
     }
