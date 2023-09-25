@@ -1,4 +1,5 @@
 console.log("js products");
+console.log("req.user, ",req.user)
 
 
  const addToCart = async(productId)=>{
