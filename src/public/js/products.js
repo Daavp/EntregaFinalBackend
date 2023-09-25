@@ -1,6 +1,4 @@
 console.log("js products");
-console.log("req.user, ",req.user)
-
 
  const addToCart = async(productId)=>{
     try {
@@ -9,11 +7,11 @@ console.log("req.user, ",req.user)
         const idProduct = productId;
         console.log(userLog.innerText);
         console.log("productId",idProduct);
-        resp =await fetch(`http://localhost:8080/api/carts/${cartId}/product/${idProduct}`,{
+        resp =await fetch(`/api/carts/${cartId}/product/${idProduct}`,{
             method:'POST',mode:"cors"
         });
         result = await resp.json();
-        console.log("products js result",result)
+        console.log("products js result",resp)
         /* console.log("Status: ",result.status,"Message: ",result.message); */
     } catch (error) {
         console.log("No hay sesión iniciada", error.message);
