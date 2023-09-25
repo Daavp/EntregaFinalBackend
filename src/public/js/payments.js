@@ -2,7 +2,7 @@ console.log("payments js");
 
 const button = document.getElementById('checkout');
 button.addEventListener('click', async()=>{
-const res = await fetch(`http://localhost:8080/api/payments/create-checkout-session`, {
+const res = await fetch(`/api/payments/create-checkout-session`, {
     method: 'POST',
 });
 const data = await res.json();
