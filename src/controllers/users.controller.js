@@ -11,13 +11,15 @@ export class userController{
             const userRole = user.role;
             if(userRole === "user"&& user.status==="Completo"){
                 user.role = "premium";
+                const result = await UsersService.updateUser(userId,user);
+                res.send("Rol del usuario modificado");    
             } else if(userRole ==="premium"){
                 user.role = "user";
+                const result = await UsersService.updateUser(userId,user);
+                res.send("Rol del usuario modificado");    
             } else {
                 return res.send("No es posible cambiar el rol del usuario, revisa tener todos tus datos actualizados")
             };
-            const result = await UsersService.updateUser(userId,user);
-            res.send("Rol del usuario modificado");
             
         } catch (error) {
             res.send(error.message);
