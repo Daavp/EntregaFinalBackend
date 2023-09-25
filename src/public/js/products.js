@@ -5,8 +5,10 @@ console.log("js products");
     try {
         const userLog = document.getElementById("cartId");
         const cartId = userLog.innerText;
+        const idProduct = productId;
         console.log(userLog.innerText);
-        resp =await fetch(`http://localhost:8080/api/carts/${cartId}/product/${productId}`,{
+        console.log("productId",idProduct);
+        resp =await fetch(`http://localhost:8080/api/carts/${cartId}/product/${idProduct}`,{
             method:'POST'
         });
         result = await resp.json();
