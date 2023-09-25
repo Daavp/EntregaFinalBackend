@@ -265,9 +265,9 @@ export class ViewsController{
     static async purchaseConfirmationView(req,res){
         try {
             let myuuid = uuidv4();
-            const cartId = req.user.cart;
+            const cartId = await req.user.cart;
             console.log("purchaseConfirmationViewCart", cartId)
-            /* const data = await cartsService.getCartById(cartId);
+            const data = await cartsService.getCartById(cartId);
             if (data){
                 logger.debug("Carrito existe puede comprar");
                const productsAproved =[];
@@ -342,7 +342,7 @@ export class ViewsController{
             };
                 //Render
                return res.render("purchaseConfirmation",clientPageInfo)
-            }; */
+            };
         } catch (error) {
             return res
             .status(500)
