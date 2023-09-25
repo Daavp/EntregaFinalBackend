@@ -1,6 +1,6 @@
 console.log("Purchase js");
 
-const res = await fetch(`/carts/purchaseConfirmation`, {
+const res = fetch(`/carts/purchaseConfirmation`, {
     method: 'GET',
 });
 const data = await res.json();
