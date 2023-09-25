@@ -26,6 +26,7 @@ export const options = {
     },
     stripe:{
         secretStripeBack:process.env.STRIPE_SECRET,
-        siteDomain:"http://localhost:8080"
+        siteDomain:"http://localhost:8080",
+        railwayDomain:"https://entregafinalbackend-production-a66b.up.railway.app"
     },
 }

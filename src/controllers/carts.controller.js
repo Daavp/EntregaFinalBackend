@@ -70,7 +70,8 @@ export class CartsController{
     };
     static async addProductToCart(req,res){
         try {
-            const cartId = req.params.cid;
+            const cartId = req.user.cart;
+            console.log(req.user.cart)
             const productId = req.params.pid;
             const userId = await UsersService.getUserByEmail(req.user.email);
             const cart= await cartsService.getCartById(cartId);

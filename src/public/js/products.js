@@ -7,7 +7,7 @@ console.log("js products");
         const idProduct = productId;
         console.log(userLog.innerText);
         console.log("productId",idProduct);
-        resp =await fetch(`/api/carts/${cartId}/product/${idProduct}`,{
+        resp =await fetch(`/api/carts/product/${idProduct}`,{
             method:'POST',mode:"cors"
         });
         result = await resp.json();
